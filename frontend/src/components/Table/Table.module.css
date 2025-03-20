@@ -1,0 +1,8 @@
+.table {
+    padding-right:4px;
+    width: 100%; 
+}
+
+.table >h4 {
+    text-align: center;
+}

@@ -1,0 +1,12 @@
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20%;
+    
+}
+
+.error_text {
+    color: '#333333';
+    font-size: 48px;
+}

@@ -1,0 +1,35 @@
+.button {
+    cursor: pointer;
+    box-sizing: border-box;
+    transition-timing-function: ease;
+    border: 1px solid #ffdd2d;
+    background-color: #ffdd2d;
+    border-radius: 4px;
+    font-size: 20px;
+    padding: 12px 20px;
+    text-align: center;
+  }
+
+  .button:hover{
+    border: 1px solid #ffba00;
+    background-color: #ffba00;
+  }
+
+  .button_exit {
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid #815ADB;
+    background-color: #815ADB;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 8px 20px;
+    margin-left: 10px;
+    text-align: center;
+    color: aliceblue;
+  }
+
+  
+  .button_exit:hover{
+    border: 1px solid #7B60BC;
+    background-color: #7B60BC;
+  }

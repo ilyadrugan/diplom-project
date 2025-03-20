@@ -1,0 +1,37 @@
+
+.main_container {
+    display: flex;
+    margin-top: 70px;
+    justify-content:center;
+    flex-direction:row;
+    padding: 6px;
+}
+
+.settings_container {
+    display: flex;
+    margin-top: 70px;
+    justify-content:flex-start;
+    flex-direction:column;
+    padding: 8px;
+}
+.text_red{
+    color: red;
+}
+.text_green{
+    color: #33CC00;
+}
+.settings_params_title >b{
+    font-size: 24px;
+}
+
+@media screen and (max-width: 680px) {
+    .main_container {
+        margin-top: 100px;
+        flex-direction:column-reverse;
+        width: 100%;
+        align-items: center;
+    }
+    .settings_container{
+        margin-top: 100px;
+    }
+  }

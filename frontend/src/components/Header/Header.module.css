@@ -1,0 +1,67 @@
+.headerBack {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333333;
+    height: 70px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.headerText_active {
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+    padding: 14px;
+    text-decoration: none;
+}
+.headerText {
+    font-size: 22px;
+    color: #888888;
+    cursor: pointer;
+    padding: 14px;
+    text-decoration: none;
+}
+
+
+nav a:hover {
+    color: #E1E1E1;
+}
+
+.header_auth {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333333;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media screen and (max-width: 680px) {
+    .header_auth {
+        height: 100px;
+    }
+    .headerBack {
+        height: 100px;
+    }
+  }
+.headerIDText {
+    font-size: 20px;
+    color: white;
+    padding: 14px;
+    text-decoration: none;
+}
+
+.header_user_info {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_img_status {
+    width: 72px;
+    height: 72px;
+    padding: 10px;
+}
