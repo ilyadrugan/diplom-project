@@ -1,0 +1,1 @@
+../../../../../node_modules/@baronha/react-native-photo-editor/ios/SnapKit/SnapKit.h

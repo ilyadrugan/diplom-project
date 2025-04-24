@@ -1,0 +1,44 @@
+{
+  "name": "react-native-photo-editor",
+  "version": "1.1.6",
+  "summary": "🌄 Image editor using native modules for iOS and Android",
+  "homepage": "https://github.com/baronha/react-native-photo-editor#readme",
+  "license": "MIT",
+  "authors": "Baron Ha. <baronn.ha@gmail.com> (https://github.com/baronha)",
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source": {
+    "git": "https://github.com/baronha/react-native-photo-editor.git",
+    "tag": "1.1.6"
+  },
+  "swift_versions": [
+    "5.0",
+    "5.1",
+    "5.2"
+  ],
+  "source_files": "ios/**/*.{h,m,mm,swift}",
+  "dependencies": {
+    "React-Core": [],
+    "SDWebImage": [
+      "~> 5.11.1"
+    ],
+    "SDWebImageWebPCoder": [
+      "~> 0.8.4"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "ZLImageEditor",
+      "source_files": "ios/ZLImageEditor/Sources/*.{h,m,mm,swift}",
+      "exclude_files": "ios/ZLImageEditor/Sources/ZLImageEditor.h",
+      "resources": "ios/ZLImageEditor/Sources/*.{png,bundle}",
+      "requires_arc": true,
+      "frameworks": [
+        "UIKit",
+        "Accelerate"
+      ]
+    }
+  ],
+  "swift_version": "5.2"
+}

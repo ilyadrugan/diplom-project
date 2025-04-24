@@ -1,0 +1,6 @@
+module Pods_billApp {
+  umbrella header "Pods-billApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

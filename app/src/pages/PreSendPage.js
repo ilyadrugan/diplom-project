@@ -13,9 +13,9 @@ import styles from '../styles/styles';
 import {Picker} from '@react-native-picker/picker';
 import urls from '../modules/urls';
 import ModalPoup from '../components/ConfirmModal';
-import RNFetchBlob from 'react-native-fetch-blob';
+// import RNFetchBlob from 'react-native-fetch-blob';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import clear from 'react-native-clear-app-cache'
+// import clear from 'react-native-clear-app-cache'
 
 export default function PreSendPage({route}) {
   const [visible, setVisible] = useState(false);
@@ -64,48 +64,48 @@ export default function PreSendPage({route}) {
     ]);
 
   const sendPhotos = (request_id, photo) => {
-    return new Promise((resolve, reject) => {
-      RNFetchBlob.fetch(
-        'POST',
-        urls.photos(),
-        {
-          'Content-Type': 'multipart/form-data',
-          'X-Api-Key': 'key',
-        },
-        [
-          {
-            name: 'photo_url',
-            filename: new Date().toString() + '_photo.jpg',
-            type: 'image/jpg',
-            data: RNFetchBlob.wrap(photo.uri),
-          },
-          {
-            name: 'coord_long',
-            data: photo.longitude,
-          },
-          {
-            name: 'request_id',
-            data: request_id.toString(),
-          },
-          {
-            name: 'coord_lat',
-            data: photo.latitude,
-          },
-        ],
-      )
-        .then(res => {
-          console.log(res);
-          resolve(res)
-        })
-        .catch(err => {
-          console.log('Ошибка отправки фото', err);
-        });
-    }).catch(e => {
-      showErrorAlert('Произошла ошибка сети, попробуйте ещё раз');
-      setLoading2(false);
-      setDisable(false)
-      reject(e)
-    });
+    // return new Promise((resolve, reject) => {
+    //   RNFetchBlob.fetch(
+    //     'POST',
+    //     urls.photos(),
+    //     {
+    //       'Content-Type': 'multipart/form-data',
+    //       'X-Api-Key': 'key',
+    //     },
+    //     [
+    //       {
+    //         name: 'photo_url',
+    //         filename: new Date().toString() + '_photo.jpg',
+    //         type: 'image/jpg',
+    //         data: RNFetchBlob.wrap(photo.uri),
+    //       },
+    //       {
+    //         name: 'coord_long',
+    //         data: photo.longitude,
+    //       },
+    //       {
+    //         name: 'request_id',
+    //         data: request_id.toString(),
+    //       },
+    //       {
+    //         name: 'coord_lat',
+    //         data: photo.latitude,
+    //       },
+    //     ],
+    //   )
+    //     .then(res => {
+    //       console.log(res);
+    //       resolve(res)
+    //     })
+    //     .catch(err => {
+    //       console.log('Ошибка отправки фото', err);
+    //     });
+    // }).catch(e => {
+    //   showErrorAlert('Произошла ошибка сети, попробуйте ещё раз');
+    //   setLoading2(false);
+    //   setDisable(false)
+    //   reject(e)
+    // });
   };
 
   const sendRequest = async () => {
@@ -140,9 +140,9 @@ export default function PreSendPage({route}) {
           // setVisible(false);
           await AsyncStorage.removeItem('photos');
           //AsyncStorage.removeItem('USER_ID');
-          clear.clearAppCache(() => {
-            console.log("Кэш очищен")
-          })
+          // clear.clearAppCache(() => {
+          //   console.log("Кэш очищен")
+          // })
           setLoading2(false);
           setDisable(false)
         })

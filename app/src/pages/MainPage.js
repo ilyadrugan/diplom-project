@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../styles/styles';
 import {RNCamera} from 'react-native-camera';
 import Geolocation from '@react-native-community/geolocation';
-import clear from 'react-native-clear-app-cache'
+// import clear from 'react-native-clear-app-cache'
 
 export default class MainPage extends React.Component {
   state = {
@@ -186,9 +186,9 @@ export default class MainPage extends React.Component {
     };
     const onExit = async () =>{
       await AsyncStorage.clear();
-      clear.clearAppCache(() => {
-        console.log("Кэш очищен")
-      })
+      // clear.clearAppCache(() => {
+      //   console.log("Кэш очищен")
+      // })
       navigation.replace('StartPage')
     }
     return (

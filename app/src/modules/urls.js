@@ -1,6 +1,6 @@
 class Urls {
   constructor() {
-    this.url = 'https://billsticker.tmweb.ru/';
+    this.url = "http://0.0.0.0:9090";
   }
 
   types() {
