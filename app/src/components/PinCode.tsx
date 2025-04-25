@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Text, View, PermissionsAndroid, StyleSheet} from 'react-native';
 import { CodeField, useBlurOnFulfill, useClearByFocusCell, Cursor } from 'react-native-confirmation-code-field';
-import ConfirmationCodeInput from './codeInput';
+import ConfirmationCodeInput from './codeInput/components/ConfirmationCodeInput';
 
 export default function PinCode({navigation, usersLogin}) {
   const [isWrongCode, setIsWrongCode] = useState(false);
@@ -11,7 +11,7 @@ export default function PinCode({navigation, usersLogin}) {
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
-  })
+  });
   const getPermission = async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -34,7 +34,8 @@ export default function PinCode({navigation, usersLogin}) {
       getPermission();
     }
   };
-  const onFinishCheckingCode = async code => {
+  const onFinishCheckingCode = async (code: string) => {
+    console.log('onFinishCheckingCode', code);
     if (usersLogin.indexOf(parseInt(code)) !== -1) {
       try {
         console.log('storing ID');
@@ -42,7 +43,7 @@ export default function PinCode({navigation, usersLogin}) {
       } catch (e) {
         console.log('error: ', e);
       }
-      getPermission();
+      await getPermission();
     } else {
       setIsWrongCode(true);
       setTimeout(() => setIsWrongCode(false), 3000);
@@ -58,15 +59,15 @@ export default function PinCode({navigation, usersLogin}) {
         <Text style={{fontSize: 16}}>Введите ваш идентификатор</Text>
       )}
       <ConfirmationCodeInput
-        // keyboardType="numeric"
+        // keyboardType="num-pad"
         codeLength={5}
         className={'border-circle'}
-        // compareWithCode="12345"
+        compareWithCode="12345"
         autoFocus={true}
         activeColor="#808080"
         inactiveColor="#808080"
         codeInputStyle={{color: 'black', borderWidth: 1.5}}
-        onFulfill={(isValid, code) => onFinishCheckingCode(code)}
+        onFulfill={onFinishCheckingCode}
       />
       {/* <CodeField
         ref={ref}

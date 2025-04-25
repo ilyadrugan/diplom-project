@@ -11,6 +11,9 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
+import org.reactnative.camera.RNCameraPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.reactnativecommunity.geolocation.GeolocationPackage;
 
 class MainApplication : Application(), ReactApplication {
 

@@ -25,7 +25,8 @@ export default function StartPage({navigation}) {
         text: 'OK',
       },
     ]);
-  const getUsers = () => {
+  const getUsers = async () => {
+    console.log('urls.users()', urls.users());
     fetch(urls.users(), {
       method: 'GET',
       headers: {'X-Api-Key': 'key'},
@@ -40,7 +41,7 @@ export default function StartPage({navigation}) {
       })
       .catch(error => {
         console.log('Error is : ', error);
-        showErrorAlert('Произошла ошибка сети, проверьте подключение к интернету', error)
+        showErrorAlert('Произошла ошибка сети, проверьте подключение к интернету', error);
         setLoading(false);
       });
   };
@@ -77,7 +78,7 @@ export default function StartPage({navigation}) {
         console.log('Hello, Mr. ', value);
         navigation.replace('MainPage');
       }
-      
+
       getPermission();
       getUsers();
       return null;
@@ -88,14 +89,14 @@ export default function StartPage({navigation}) {
 
   useEffect(() => {
     getUserID();
-  });
+  }, []);
 
   return (
     <SafeAreaView>
-    
+
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <ScrollView contentContainerStyle={{height:'100%',alignItems: 'center', justifyContent: 'center'}}>
-        {!isLoading ? (
+        {isLoading ? (
           <ActivityIndicator size="large" />
         ) : (
           <PinCode
