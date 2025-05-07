@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-
+import pymysql
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context 
+pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,7 +29,7 @@ SECRET_KEY = 'django-insecure-i^c-9nh!l1l@60)hf&ld_^le!_=i3-on)zps!3rpv=a_d0aue(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.17', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['*']
 
 API_KEY_SECRET = 'key'
 

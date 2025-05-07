@@ -19,6 +19,7 @@ const PhotoLink = ({ photo_url, index, address, time }) => {
 };
 
 const TableRow = ({ photos, request, type }) => {
+  
   return (
     <tr>
       <td>
@@ -64,9 +65,12 @@ const TrackTable = (props) => {
         </thead>
         <tbody>
           {requests.map((req) => {
+            console.log('req', req)
             const photoToRender = photos.filter(
               (photo) => photo.request_id == req.id
             );
+            console.log('photoToRender', photoToRender)
+
             const type = types.find(
               (type) => type.id == req.type_id
             );

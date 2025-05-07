@@ -1,6 +1,6 @@
 class Urls {
   constructor() {
-    this.url = "http://co68153-django-fbq7w.tw1.ru";
+    this.url = "http://127.0.0.1:8000";
   }
 
   types() {

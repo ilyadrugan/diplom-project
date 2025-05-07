@@ -82,7 +82,6 @@ class PhotoViewSet(APIView):
         geolocator = Nominatim(user_agent="stickers_app")
         location = geolocator.reverse(f"{coord_lat}, {coord_long}")
         request.data.update({'address': location.address})
-        print('request.data',request.data)
         serializer_for_writing = self.serializer_class(data=request.data)
         serializer_for_writing.is_valid(raise_exception=True)
         serializer_for_writing.save()
@@ -99,6 +98,8 @@ class RequestViewSet(APIView):
         return Response({"data": serializer.data})
 
     def post(self, request):
+        print('request.data',request.data)
+
         serializer_for_writing = self.serializer_class(data=request.data)
         serializer_for_writing.is_valid(raise_exception=True)
         serializer_for_writing.save()

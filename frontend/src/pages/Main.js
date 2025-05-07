@@ -132,8 +132,10 @@ const Main = () => {
         ) : (
           <TrackTable date={datePick} requests={dateRequests} photos={photos} types={types}/>
         )}
+        <div>
+        <Calendar style={{maxHeight: 400}} onChange={(date)=>onChangeDate(date)} value={datePick} />
 
-        <Calendar onChange={(date)=>onChangeDate(date)} value={datePick} />
+        </div>
       </div>
     </>
   );
