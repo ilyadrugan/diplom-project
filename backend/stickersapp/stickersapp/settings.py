@@ -46,11 +46,13 @@ INSTALLED_APPS = [
     'stickersapp',
     'corsheaders',
     'rest_framework_api_key',
+    'rest_framework_simplejwt',
 ]
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework_api_key.permissions.HasAPIKey",
-    ]
+    # "DEFAULT_PERMISSION_CLASSES": [
+    #     "rest_framework_api_key.permissions.HasAPIKey",
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # ]
 }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -104,9 +106,9 @@ WSGI_APPLICATION = 'stickersapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'stickersproject_DB', #здесь должно быть название базы данных, находящейся на хостинге
-        'USER': 'root', #имя пользователя на хостинге
-        'PASSWORD': '', #пароль от базы данных на хостинге
+        'NAME': 'stickersproject_DB', #здесь должно быть название базы данных, находящейся на хостинге cl55442_stickers
+        'USER': 'root', #имя пользователя на хостинге cl55442_stickers
+        'PASSWORD': '', #пароль от базы данных на хостинге 1qaz@WSX
         'HOST': 'localhost',
         'PORT': 3306, # Стандартный порт MySQL
         'OPTIONS': {'charset': 'utf8'},
@@ -114,6 +116,18 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'cl55442_stickers', #здесь должно быть название базы данных, находящейся на хостинге cl55442_stickers
+#         'USER': 'cl55442_stickers', #имя пользователя на хостинге cl55442_stickers
+#         'PASSWORD': '1qaz@WSX', #пароль от базы данных на хостинге 1qaz@WSX
+#         'HOST': 'localhost',
+#         'PORT': 3306, # Стандартный порт MySQL
+#         'OPTIONS': {'charset': 'utf8'},
+#         'TEST_CHARSET': 'utf8',
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

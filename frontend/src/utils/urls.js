@@ -1,8 +1,12 @@
 class Urls {
   constructor() {
-    this.url = "http://127.0.0.1:8000";
+    this.prodURL = "https://cl55442.tw1.ru";
+    this.url =  "https://cl55442.tw1.ru"
   }
 
+  login() {
+    return `${this.url}/login/`;
+  }
   types() {
     return `${this.url}/types/`;
   }
@@ -13,7 +17,10 @@ class Urls {
     return `${this.url}/users/`;
   }
   requests() {
-    return `${this.url}/requests/`;
+    return `${this.url}/requests`;
+  }
+  prodURL() {
+    return `${this.prodURL}`;
   }
 }
 const urls = new Urls();

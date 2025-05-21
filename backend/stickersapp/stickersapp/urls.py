@@ -19,6 +19,10 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 # ViewSets define the view behavior.
 
 # Routers provide an easy way of automatically determining the URL conf.
@@ -31,11 +35,17 @@ router = routers.DefaultRouter()
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    path('login/', LoginView.as_view(), name='custom_login'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # логин
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # обновление токена
     path('types/', TypeViewSet.as_view()),
     path('types/<int:pk>', TypeViewObject.as_view()),
     path('photos/', PhotoViewSet.as_view()),
     path('requests/', RequestViewSet.as_view()),
+    path('requests/<int:pk>', RequestViewSet.as_view()),
+
     path('users/', UserViewSet.as_view()),
+    path('users/<int:pk>', UserViewSet.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

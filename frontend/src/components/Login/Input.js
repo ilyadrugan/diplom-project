@@ -17,7 +17,7 @@ const Input = (props) => {
         <Form.Group className="mb-3" controlId="formPassword">
           <Form.Label>Пароль</Form.Label>
           <Form.Control type="password" placeholder="Пароль" />
-          {!props.dataCheck && <div className={styles.text_red}>Пароль и/или Email не верны</div>}
+          <div style={{minHeight: 24}} className={styles.text_red}>{props.errorMessage}</div>
           {!props.fieldCheck && <div className={styles.text_red}>Заполните все поля</div>}
 
         </Form.Group>

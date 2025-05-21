@@ -17,21 +17,21 @@ const Registration = () => {
   const [userCreated, setUserCreated] = useState(false);
   const [userCreatedID, setUserCreatedID] = useState(null);
   const navigate = useNavigate()
-  const getUsers = (email, password) => {
-    fetch(urls.users(), {
-      method: "GET",
-      headers: { "X-Api-Key": "key" },
-    })
-    .then((resp) => resp.json())
-    .then((data) => {
-      setUsers(data.data);
-      checkValidEmail(email,data.data, password)
-    })
-    .catch((error) => {
-      console.log("Error is : ", error);
-      setIsLoading(false);
-    });
-  };
+  // const getUsers = (email, password) => {
+  //   fetch(urls.users(), {
+  //     method: "GET",
+  //     headers: { "X-Api-Key": "key" },
+  //   })
+  //   .then((resp) => resp.json())
+  //   .then((data) => {
+  //     setUsers(data.data);
+  //     checkValidEmail(email,data.data, password)
+  //   })
+  //   .catch((error) => {
+  //     console.log("Error is : ", error);
+  //     setIsLoading(false);
+  //   });
+  // };
   const createUser = (email, password, tmpID)=>{
     const formData = new FormData();
     formData.append('login', tmpID);
@@ -98,7 +98,7 @@ const Registration = () => {
     }
     if (users === undefined) {
         setIsLoading(true);
-        return getUsers(email, password);
+        // return getUsers(email, password);
     }
 
     setIsLoading(true);

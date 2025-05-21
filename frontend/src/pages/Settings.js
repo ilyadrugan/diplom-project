@@ -109,14 +109,14 @@ const Settings = () => {
               ))}
             </Form.Select>
           </FloatingLabel>
-          <Button
+          {/* <Button
             style={{ width: "100%", marginTop: 10 }}
             variant="outline-danger"
             disabled={isLoading}
             onClick={deleteType}
           >
             Удалить
-          </Button>
+          </Button> */}
           {successDeleteType && <div className={styles.text_green}>Тип объявления успешно удалён</div>}
 
         </Col>

@@ -1,45 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
 import Button from "../components/Button/Button";
 import Input from "../components/Login/Input";
 import urls from "../utils/urls";
+import userStore from "../stores/userStore/UserStore";
+import { observer } from "mobx-react";
 
-const Login = () => {
+export const Login = observer(() => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
   const [users, setUsers] = useState(undefined);
   const [dataChecks, setDataChecks] = useState(true);
   const [fillFieldsCheck, setFillFieldsCheck] = useState(true);
   
-  const getUsers = (email, password) => {
-    fetch(urls.users(), {
-      method: "GET",
-      headers: { "X-Api-Key": "key" },
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        setUsers(data.data);
-        checkData(email, password, data.data);
-      })
-      .catch((error) => {
-        console.log("Error is : ", error);
-        setIsLoading(false);
-      });
-  };
-  const checkData = async (email, password, dataUsers) => {
-    const usersArr = users || dataUsers;
-    const curUser = usersArr.find(
-      (user) => user.email === email && user.password === password
-    );
-    if (curUser) {
-      await sessionStorage.setItem("isAuth", true);
-      await sessionStorage.setItem("_currentUser", JSON.stringify(curUser));
-      setIsLogged(true);
-    }
-    setIsLoading(false);
-    return setDataChecks(false);
-  };
-  const submitClick = () => {
+  // useEffect(() => {
+  //   getUsers()
+  // }, [])
+  
+
+  // const getUsers = async (email, password) => {
+  //   await fetch(urls.users(), {
+  //     method: "GET",
+  //     headers: { "X-Api-Key": "key" },
+  //   })
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       setUsers(data.data);
+  //       // checkData(email, password, data.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error is : ", error);
+  //       setIsLoading(false);
+  //     });
+  // };
+
+  const submitClick = async () => {
     setDataChecks(true);
     setFillFieldsCheck(true);
     const email = document.getElementById("formEmail").value.trim();
@@ -48,10 +43,10 @@ const Login = () => {
       return setFillFieldsCheck(false);
     }
     setIsLoading(true);
-    if (users === undefined) {
-      return getUsers(email, password);
-    }
-    checkData(email, password);
+    // if (users === undefined) {
+    //   return getUsers(email, password);
+    // }
+    await userStore.login({login:email, password: password}, ()=>setIsLogged(true));
   };
 
   const navigateClick = () => {
@@ -72,13 +67,11 @@ const Login = () => {
         justifyContent: "space-around",
       }}
     >
-      {isLoading ? (
-        <Spinner animation="border" />
-      ) : isLogged ? (
+      { isLogged ? (
         <>
           <h4>
             Вход выполнен, ваш ID:{" "}
-            <b>{JSON.parse(sessionStorage.getItem("_currentUser")).login}</b>
+            <b>{JSON.parse(localStorage.getItem("_currentUser")).login}</b>
           </h4>
 
           <Button type="submit" onClick={navigateClick}>
@@ -88,16 +81,17 @@ const Login = () => {
       ) : (
         <>
           <h4>Вход</h4>
-          <Input dataCheck={dataChecks} fieldCheck={fillFieldsCheck}></Input>
+          <Input errorMessage={userStore.errorMessage} dataCheck={dataChecks} fieldCheck={fillFieldsCheck}></Input>
 
           <Button type="submit" onClick={submitClick}>
-            Войти
+            {userStore.isLoading ? (
+              <Spinner animation="border" />
+            ):'Войти'}  
           </Button>
         </>
       )}
     </div>
   );
   //}
-};
+});
 
-export default Login;

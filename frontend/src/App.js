@@ -4,18 +4,24 @@ import {
   Routes,
   Navigate,
   useLocation,
-  HashRouter 
+  HashRouter, 
+  BrowserRouter
 } from "react-router-dom";
-import Login from "./pages/Login";
+import {Login} from "./pages/Login";
 import Error from "./pages/Error";
 import Registration from "./pages/Registration";
 import Main from "./pages/Main";
+import RequestDetails from "./pages/RequestDetails";
 import Header from "./components/Header/Header";
 import Settings from "./pages/Settings";
+import userStore from "./stores/userStore/UserStore";
+import { observer } from "mobx-react";
+import UsersList from "./pages/Users";
+import UserDetails from "./pages/UserDetails";
 
-function App() {
-  const isAuth = JSON.parse(sessionStorage.getItem("isAuth"));
-  const user = JSON.parse(sessionStorage.getItem("_currentUser"));
+export const App = observer(() => {
+  const isAuth = localStorage.getItem("token")? true : false;
+  const user = JSON.parse(localStorage.getItem("_currentUser"));
 
   function RequireAuth({ children }) {
     let location = useLocation();
@@ -27,12 +33,10 @@ function App() {
   }
   return (
       
-<HashRouter>
+<BrowserRouter>
 <Header isAuth={isAuth} />
         <Routes >
-        {/* <Route path='/' element={<Header isAuth={isAuth} />}> */}
-
-          {/* <Route  path="/" element={isAuth ?  <Navigate  to="/dashboard" replace /> : <Navigate  to="/login" replace />}/> */}
+       
           <Route
             path="/"
             element={
@@ -42,17 +46,35 @@ function App() {
             }
           />
           <Route
+              path="/request/:id"
+              element={
+              <RequireAuth>
+                <RequestDetails />
+              </RequireAuth>
+            }
+            />
+            <Route
+              path="/user/:id"
+              element={
+              <RequireAuth>
+                <UserDetails />
+              </RequireAuth>
+            }
+            />
+            <Route
+              path="/users"
+              element={
+              <RequireAuth>
+                <UsersList />
+              </RequireAuth>
+            }
+            />
+          <Route
             path="/settings"
             element={
-              isAuth ? (
-                user.user_status === "master" ? (
-                  <Settings />
-                ) : (
-                  <Navigate to="/" replace />
-                )
-              ) : (
-                <Navigate to="/login" replace />
-              )
+              <RequireAuth>
+                <Settings />
+              </RequireAuth>
             }
           ></Route>
 
@@ -66,12 +88,11 @@ function App() {
               isAuth ? <Navigate to="/" replace /> : <Registration />
             }
           />
+          
           <Route path="*" element={<Error />} />
-
+        
 
       </Routes>
-      </HashRouter>
+      </BrowserRouter>
       );
-}
-
-export default App;
+})

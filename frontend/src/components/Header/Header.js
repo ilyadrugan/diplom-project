@@ -3,11 +3,13 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import ExitButton from "../Button/ExitButton";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-const Header = ({ isAuth }) => {
-  const user=JSON.parse(sessionStorage.getItem("_currentUser"))
+import userStore from "../../stores/userStore/UserStore";
+import { observer } from "mobx-react";
+const Header = observer(({ isAuth }) => {
+  const user=JSON.parse(localStorage.getItem("_currentUser"))
   const navigate = useNavigate();
   const exitClick = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     navigate('/',{replace:true});
     document.location.reload();
   };
@@ -19,17 +21,6 @@ const Header = ({ isAuth }) => {
             <ExitButton type="submit" onClick={exitClick}>
               Выход
             </ExitButton>
-            {user.user_status === "master" && (
-              <NavLink
-                className={(props) =>
-                  props.isActive ? styles.headerText_active : styles.headerText
-                }
-                to="/settings"
-              >
-                Настройки
-              </NavLink>
-            )}
-
             <NavLink
               className={(props) =>
                 props.isActive ? styles.headerText_active : styles.headerText
@@ -38,6 +29,29 @@ const Header = ({ isAuth }) => {
             >
               Главная
             </NavLink>
+            {user.user_status === "M" && (
+              <>
+              <NavLink
+                className={(props) =>
+                  props.isActive ? styles.headerText_active : styles.headerText
+                }
+                to="/settings"
+              >
+                Настройки
+              </NavLink>
+              <NavLink
+                className={(props) =>
+                  props.isActive ? styles.headerText_active : styles.headerText
+                }
+                to="/users"
+              >
+                Пользователи
+              </NavLink>
+              </>
+              
+            )}
+
+            
           </nav>
           <div className={styles.header_user_info}>
             <OverlayTrigger
@@ -45,7 +59,7 @@ const Header = ({ isAuth }) => {
               placement={"bottom"}
               overlay={
                 <Tooltip id={`tooltip-bottom`}>
-                  Вы имеете статус <strong>{user.user_status}</strong>
+                  <strong>{userStore.user.user_status==='M'?'Администратор':'Расклейщик'}</strong>
                 </Tooltip>
               }
             >
@@ -56,20 +70,20 @@ const Header = ({ isAuth }) => {
               />
             </OverlayTrigger>
             <div className={styles.headerIDText}>
-              Ваш идентификационный номер: <b>{user.login}</b>
+              Ваш номер: <b>{user.login}</b>
             </div>
           </div>
         </>
       ) : (
         <nav>
-          <NavLink
+          {/* <NavLink
             className={(props) =>
               props.isActive ? styles.headerText_active : styles.headerText
             }
             to="/registration"
           >
             Регистрация
-          </NavLink>
+          </NavLink> */}
           <NavLink
             className={(props) =>
               props.isActive ? styles.headerText_active : styles.headerText
@@ -82,6 +96,6 @@ const Header = ({ isAuth }) => {
       )}
     </div>
   );
-};
+});
 
 export default Header;
