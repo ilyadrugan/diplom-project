@@ -5,6 +5,7 @@ import Input from "../components/Login/Input";
 import urls from "../utils/urls";
 import userStore from "../stores/userStore/UserStore";
 import { observer } from "mobx-react";
+import { Tooltip, OverlayTrigger } from "react-bootstrap";
 
 export const Login = observer(() => {
   const [isLoading, setIsLoading] = useState(false);
@@ -56,6 +57,27 @@ export const Login = observer(() => {
 
 
   return (
+    <>
+    <div style={{position: 'absolute', left: 20, bottom: 20}}>
+      <OverlayTrigger
+              key={"right"}
+              placement={"right"}
+              overlay={
+                <Tooltip id={`tooltip-right`}>
+                  <div>{'Скачать android приложение'}</div>
+                </Tooltip>
+              }
+            >
+        <a href="/bill.apk" download>
+        
+         <img
+          src="/androidapk.png"
+          alt="Preview"
+          className={"hover-zoom"}
+        />
+        </a>
+        </OverlayTrigger>
+      </div>
     <div
       style={{
         display: "flex",
@@ -90,7 +112,9 @@ export const Login = observer(() => {
           </Button>
         </>
       )}
+      
     </div>
+    </>
   );
   //}
 });
