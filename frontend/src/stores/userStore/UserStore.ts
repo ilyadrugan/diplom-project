@@ -37,7 +37,13 @@ export class UserStore {
         console.log('THEN', result.data.data);
         
         if (result.data.data) {
-          this.users = result.data.data
+          if (this.user.login!== 11111) {
+            this.users = result.data.data.filter((user:UserInfoModel)=>user.user_status==='W')
+          }
+          else {
+            this.users = result.data.data
+          }
+          
         }
       
       })
