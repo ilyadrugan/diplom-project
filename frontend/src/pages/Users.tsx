@@ -91,18 +91,19 @@ const filteredUsers = userStore.users.filter(user => {
   );
 });
   return (
-    <div style={{paddingTop: 76}}>
+    <div style={{ paddingTop: 76, paddingLeft: 16, paddingRight: 16,}}>
 
     <div style={{gap: 16, alignItems: 'center'}} className="d-flex justify-content-between mb-3">
         <Form.Control
           type="text"
+          style={{flex: 0.98}}
           placeholder="Поиск по пользователям..."
           // className="mb-3"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Button  variant="primary" onClick={() => setShowModal(true)}>
-          Создать
+          Создать нового
         </Button>
     </div>
     <div style={{marginTop: 16}}></div>
