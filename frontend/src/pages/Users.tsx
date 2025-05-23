@@ -16,6 +16,8 @@ import { CreateUserModel } from "../stores/userStore/models";
 
 const UsersList = observer(() => {
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
   const [formData, setFormData] = useState<CreateUserModel>({
     email: '',
     user_status: 'W',
@@ -79,15 +81,32 @@ const [showModal, setShowModal] = useState(false);
       </div>
     );
   }
-
+const filteredUsers = userStore.users.filter(user => {
+  const query = searchQuery.toLowerCase();
+  return (
+    user.id.toString().includes(query) ||
+    user.login?.toString().toLowerCase().includes(query) ||
+    user.email?.toLowerCase().includes(query) ||
+    user.user_status?.toLowerCase().includes(query)
+  );
+});
   return (
     <div style={{paddingTop: 76}}>
-    <div className="d-flex justify-content-end mb-3">
-        <Button variant="primary" onClick={() => setShowModal(true)}>
+
+    <div style={{gap: 16, alignItems: 'center'}} className="d-flex justify-content-between mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Поиск по пользователям..."
+          // className="mb-3"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <Button  variant="primary" onClick={() => setShowModal(true)}>
           Создать
         </Button>
     </div>
     <div style={{marginTop: 16}}></div>
+    
     <Table striped bordered hover>
         <thead>
           <tr>
@@ -104,7 +123,7 @@ const [showModal, setShowModal] = useState(false);
           </tr>
         </thead>
         <tbody>
-          {userStore.users.map((user) => {
+          {filteredUsers.map((user) => {
            
             return (
               <tr key={user.id}>

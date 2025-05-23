@@ -21,8 +21,8 @@ const PhotoLink = ({ photo_url, index, address, time }) => {
   );
 };
 
-const TableRow = ({ photos, request, type }) => {
-  
+const TableRow = ({ photos, request, type, users }) => {
+  const user = users.find((user)=>user.login === request.user_login)
   return (
     <tr>
       <td>
@@ -33,7 +33,12 @@ const TableRow = ({ photos, request, type }) => {
         
         {/* , {new Date(request.time_create).toLocaleTimeString()} */}
       </td>
-      <td>{request.user_login}</td>
+      <td>
+     <a
+        href={`/user/${user.id}`}
+        rel="noopener noreferrer"
+      >{request.user_login}</a>
+      </td>
       <td>{type}</td>
       <td style={{ display: "flex", flexDirection: "column" }}>
         {photos.map((photo, i) => (
@@ -56,7 +61,7 @@ const TableRow = ({ photos, request, type }) => {
   );
 };
 
-const TrackTable = ({requests, date}) => {
+const TrackTable = ({requests, date, users}) => {
  // eslint-disable-next-line react-hooks/rules-of-hooks
  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   console.log('reqs', requests)
@@ -99,7 +104,7 @@ const TrackTable = ({requests, date}) => {
               onClick={() => handleSort("user_login")}
               style={{ cursor: "pointer" }}
             >
-              Идентификатор
+              Автор
             </th>
             <th
               onClick={() => handleSort("type_id")}
@@ -131,6 +136,7 @@ const TrackTable = ({requests, date}) => {
                 photos={req.photos}
                 request={req}
                 type={req.type.type_name}
+                users={users}
               ></TableRow>
             );
           })}

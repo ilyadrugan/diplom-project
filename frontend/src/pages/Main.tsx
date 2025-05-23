@@ -46,7 +46,7 @@ const Main = observer(() => {
             <Spinner animation="border" />
           </div>
         ) : (
-          <TrackTable requests={requestStore.requestsFilteredList} date={datePick}/>
+          <TrackTable requests={requestStore.requestsFilteredList} date={datePick} users={userStore.users}/>
         )}
         <div>
         <Calendar style={{maxHeight: 400}} onChange={(date)=>onChangeDate(date)} value={datePick} />

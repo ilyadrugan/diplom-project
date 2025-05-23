@@ -15,8 +15,10 @@ export class UserStore {
     makeAutoObservable(this);
     const user = JSON.parse(localStorage.getItem("_currentUser"));
     if (user) {
+      this.getUsers()
       this.user = user
     }
+    
   }
 
   setUser(userData: UserInfoModel) {
