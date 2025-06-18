@@ -1,7 +1,8 @@
 class Urls {
   constructor() {
-    this.prodURL = "https://cl55442.tw1.ru";
-    this.url =  "https://cl55442.tw1.ru"
+    this.prodURL = "http://127.0.0.1:8000";
+    this.url =  "http://127.0.0.1:8000"
+    this.localurl =  "http://localhost:3000"
   }
 
   login() {

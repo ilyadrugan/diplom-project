@@ -53,16 +53,6 @@ class PhotoSerializer(serializers.ModelSerializer):
         model = Photos
         fields = '__all__'
 
-class RequestSerializer(serializers.ModelSerializer):
-    type_id = serializers.IntegerField()
-    type = TypeSerializer(read_only=True)
-    user_login = serializers.IntegerField()
-    comment = serializers.CharField(max_length=255, allow_null=True)
-    photos = PhotoSerializer(many=True, read_only=True)
-    class Meta:
-        model = Requests
-        fields = '__all__'
-
 class UserSerializer(serializers.ModelSerializer):
     login = serializers.IntegerField()
     email = serializers.CharField(max_length=255)
@@ -70,6 +60,19 @@ class UserSerializer(serializers.ModelSerializer):
     user_status = serializers.CharField(max_length=255, allow_null=True)
     name = serializers.CharField(max_length=255)
     last_name = serializers.CharField(max_length=255)
+    middle_name = serializers.CharField(max_length=255)
     class Meta:
         model = Users
         fields = '__all__'
+
+class RequestSerializer(serializers.ModelSerializer):
+    type_id = serializers.IntegerField()
+    type = TypeSerializer(read_only=True)
+    user_login = serializers.IntegerField()
+    user = UserSerializer(read_only=True)
+    comment = serializers.CharField(max_length=255, allow_null=True)
+    photos = PhotoSerializer(many=True, read_only=True)
+    class Meta:
+        model = Requests
+        fields = '__all__'
+

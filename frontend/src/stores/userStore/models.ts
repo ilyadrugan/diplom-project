@@ -12,6 +12,7 @@ export type UserInfoModel = {
     user_status: string;
     name: string;
     last_name: string;
+    middle_name: string;
 }
 
 export type CreateUserModel = {
@@ -19,6 +20,7 @@ export type CreateUserModel = {
     user_status: string;
     name: string;
     last_name: string;
+    middle_name: string;
     password: string;
 }
 
@@ -27,4 +29,5 @@ export type ChangeUserModel = {
     user_status: string;
     name: string;
     last_name: string;
+    middle_name: string;
 }

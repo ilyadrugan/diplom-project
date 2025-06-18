@@ -92,13 +92,14 @@ const RequestDetails = observer(() => {
       // Вызов функции, которая обновит статус на бэке
       // onStatusChange && onStatusChange(newStatus);
     };
+    const user = userStore.users.find((user)=>user.login === request.user_login)
   return (
     <div style={{paddingTop: 76}}>
     <Container className="content-with-header" >
       <Card>
         <Card.Body>
           <Card.Title>Детали Фотоотчета №{request.id}</Card.Title>
-          <Card.Text><strong>Пользователь:</strong> {request.user_login}</Card.Text>
+          <Card.Text><strong>Пользователь:</strong> {request.user_login} - {user.last_name} {user.name} {user.middle_name}</Card.Text>
           <Card.Text><strong>Тип:</strong> {request.type?.type_name || request.type_id}</Card.Text>
           <Card.Text><strong>Комментарий:</strong> {request.comment || "—"}</Card.Text>
           <Card.Text>

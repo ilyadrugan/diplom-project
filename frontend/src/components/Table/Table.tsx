@@ -22,6 +22,7 @@ const PhotoLink = ({ photo_url, index, address, time }) => {
 };
 
 const TableRow = ({ photos, request, type, users }) => {
+  console.log('request', request)
   const user = users.find((user)=>user.login === request.user_login)
   return (
     <tr>
@@ -37,7 +38,7 @@ const TableRow = ({ photos, request, type, users }) => {
      <a
         href={`/user/${user.id}`}
         rel="noopener noreferrer"
-      >{request.user_login}</a>
+      >{user.last_name} {user.name[0]}. {user.middle_name[0]}.</a>
       </td>
       <td>{type}</td>
       <td style={{ display: "flex", flexDirection: "column" }}>
@@ -142,7 +143,7 @@ const TrackTable = ({requests, date, users}) => {
           })}
         </tbody>
       </Table>
-      <button onClick={() => exportTableToExcel(requests)}>Экспорт в Excel</button>
+      <button onClick={() => exportTableToExcel(requests, users)}>Экспорт в Excel</button>
     </div>
   );
 };

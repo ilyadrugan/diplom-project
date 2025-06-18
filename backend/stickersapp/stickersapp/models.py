@@ -50,7 +50,7 @@ class Users(models.Model):
     user_status = models.CharField(max_length=255, choices=statuses, default="W",null=True)
     name = models.CharField(max_length=255, default="Name", verbose_name="Name")
     last_name = models.CharField(max_length=255,default="Last Name", verbose_name="Last_name")
-
+    middle_name = models.CharField(max_length=255, default="Last Name", verbose_name="Last_name")
     def __str__(self):
         return str(self.id)
     class Meta:

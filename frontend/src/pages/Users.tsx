@@ -23,6 +23,7 @@ const UsersList = observer(() => {
     user_status: 'W',
     name: '',
     last_name: '',
+    middle_name: '',
     password: ''
   });
 const [showModal, setShowModal] = useState(false);
@@ -117,6 +118,9 @@ const filteredUsers = userStore.users.filter(user => {
             <th>
               Идентификатор
             </th>
+            <th>
+              ФИО
+            </th>
             <th>Email</th>
             <th>
               Роль
@@ -135,6 +139,7 @@ const filteredUsers = userStore.users.filter(user => {
                     >{user.id}</a>
                     </td>
                     <td>{user.login}</td>
+                    <td>{user.last_name} {user.name} {user.middle_name}</td>
                     <td>{user.email}</td>
                     <td style={{textAlign: "center"}}>
                         <OverlayTrigger
@@ -178,7 +183,10 @@ const filteredUsers = userStore.users.filter(user => {
               <Form.Label>Фамилия</Form.Label>
               <Form.Control name="last_name" value={formData.last_name} onChange={handleChange} />
             </Form.Group>
-
+            <Form.Group className="mb-3">
+              <Form.Label>Отчество</Form.Label>
+              <Form.Control name="middle_name" value={formData.middle_name} onChange={handleChange} />
+            </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Пароль</Form.Label>
               <Form.Control type="password" name="password" value={formData.password} onChange={handleChange} />

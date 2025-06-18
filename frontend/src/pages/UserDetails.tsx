@@ -24,7 +24,8 @@ const UserDetails = observer(() => {
     email: '',
     user_status: 'W',
     name: '',
-    last_name: ''
+    last_name: '',
+    middle_name: ''
   });
   useEffect(() => {
     if (id) {
@@ -129,7 +130,14 @@ const handleSubmit = async (e) => {
             onChange={handleChange}
           />
         </Form.Group>
-
+        <Form.Group className="mb-3">
+          <Form.Label>Отчество</Form.Label>
+          <Form.Control
+            name="middle_name"
+            value={user.middle_name}
+            onChange={handleChange}
+          />
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Статус</Form.Label>
           <Form.Select
